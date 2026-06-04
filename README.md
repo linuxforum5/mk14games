@@ -8,7 +8,7 @@
 ║   ║   ║  ║      ║  ║  ║ ║  ║   ║   ║    ║  ║      ║  ║ ║      ║   ║  ║ ║
  ══  ══  ══                           ══             ══   ══              ══
 ```
-[Magyar nyelvű leírás](#magyar)
+[Magyar nyelvű leírás](#Magyar-nyelvű-leírás)
 
 An entertaining logic game for the standard SC-MK14 computer, even with as little as 256 bytes of memory.
 
@@ -61,7 +61,7 @@ Tested with the [MK14.py](https://github.com/dallday/MK14_Emulator_python) emula
 
 ---
 
-## Magyar nyelvű leírás{#magyar}
+## Magyar nyelvű leírás
 
 Egy élvezetes logikai játék az alapkiépítésű SC-MK14 számítógépre, akár már 256 bájt memóriával is.
 
