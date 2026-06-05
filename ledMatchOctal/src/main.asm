@@ -23,7 +23,7 @@ InitGame:
 	>LDP 2,DataSegment	; P2 start address of video ram and data segment
 	>LDP 3,CRom		; P3 start address of ROM charset
 StartNextPuzzle:
-	LDI 11			; the last byte for clear [ 11 - 0 ]
+	LDI 11			; the last byte (Success) for clear [ 11 - 0 ]
 ClearLoop:			; 
 	    XAE			; E := A
 	    LDI 0		; Data for clear
@@ -32,9 +32,11 @@ ClearLoop:			;
 	    CCL			; Clear Cy
 	    ADE			; A := E-1
 	JP ClearLoop		; Jump if A >= 0
-	LD NewPuzzle(2)		; Activate new puzzle
-	ANI 127			; Only 7 segments
-	ST Puzzle(2)
+NextNewPuzzle:
+	ILD NewPuzzle(2)	; Increment and activate new puzzle
+	ANI 127
+	JZ NextNewPuzzle	; Empty puzzle is not enabled
+	ST CurPuzzle(2)		; Store new not empty puzzle
 StartWithKeyStateArchive:
 	LD KeybState(2)
 	ST LastKeybState(2)	; Store previous keyboard state ( 0, 248-255 )
@@ -131,7 +133,7 @@ StartWitXorSum:
 	XOR XorSum(2)
 	ST XorSum(2)				; A contanins current XOR value
 	XAE
-	LD Puzzle(2)
+	LD CurPuzzle(2)
 	XRE
 	JNZ StartWithKeyStateArchive
 ;;; Success
@@ -147,8 +149,8 @@ SuccessLoop:
 	ST StatusPosition(2)
 NextPuzzle:
 	ILD NewPuzzle(2)
-	JZ NextPuzzle
-	ST Success(2)
+	LDI 255
+	ST Success(2)				; (Success) := 255
 	>BigJumpInPage StartWithKeyStateArchive
 
 MaybeGoPressed:
@@ -164,15 +166,14 @@ NoGo:
 	LDE					; Check Term key
 	XRI 7					; Term key
 	JNZ BigJumpKeyNotPressed
-	ILD NewPuzzle(2)
-	>BigJumpInPage StartNextPuzzle
+	>BigJumpInPage StartNextPuzzle		; Add new puzzle in start
 
 DispKey		.EQ 0x0D00			; Display and keyboard Address
 CRom		.EQ 0x110B			; Charset start address
 DataSegment:	.DB 0,0,0,0,0,0,0,0		; Video ram
 		.DB 0,0,0			; variables to be initialized
-		.DB 0,0,0,DefaultPuzzle,0	; variables that don't need to be initialized
-Puzzle:		.EQ PuzzlePosition		; Use direct in video ram
+		.DB 0,0,0,DefaultPuzzle-1,0	; variables that don't need to be initialized
+CurPuzzle:	.EQ PuzzlePosition		; Use direct in video ram
 XorSum:		.EQ CurrentPosition		; Use direct in video ram
 LastNumChar:	.EQ 8				; Last pressed key number character format: (between 1-127, not 0)
 KeybState:	.EQ 9				; The 1's complement of the value of the currently pressed key, or 0 (248-255 or 0)
