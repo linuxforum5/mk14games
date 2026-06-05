@@ -23,15 +23,15 @@ InitGame:
 	>LDP 2,DataSegment	; P2 start address of video ram and data segment
 	>LDP 3,CRom		; P3 start address of ROM charset
 StartNextPuzzle:
-	LDI 12			; number of first bytes for clear [ 0 - 11 ]
-	ST Addr(2)
+	LDI 11			; the last byte for clear [ 11 - 0 ]
 ClearLoop:			; 
-	    DLD Addr(2)
-	    XAE
-	    LDI 0
-	    ST E(2)
-	    LD Addr(2)
-	JNZ ClearLoop
+	    XAE			; E := A
+	    LDI 0		; Data for clear
+	    ST E(2)		; Clear data segment E. byte
+	    LDI 0xFF		; -1
+	    CCL			; Clear Cy
+	    ADE			; A := E-1
+	JP ClearLoop		; Jump if A >= 0
 	LD NewPuzzle(2)		; Activate new puzzle
 	ANI 127			; Only 7 segments
 	ST Puzzle(2)
