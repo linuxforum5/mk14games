@@ -35,7 +35,7 @@ The ASM source code can be compiled into a binary using the sbasm3 compiler, and
 ### The game parameters
 - Load address: 0x0F12.
 - Entry address: 0x0F12.
-- Size: 228 bytes.
+- Size: 230 bytes.
 
 ### Running the game on an original MK14 console
 
@@ -89,7 +89,7 @@ Az asm forráskód sbasm3 fordítóval fordítható binárissá, és az mk14bin2
 ### A játék paraméterei
 - Betöltési címe: 0x0F12.
 - Indítási címe: 0x0F12.
-- Mérete: 228 bájt.
+- Mérete: 230 bájt.
 
 ### A játék futtatása eredeti MK14 gépen
 Egy magnóillesztó kapcsoláson keresztül a dist mappában található wav fájl lejátszásával a következő módon:
