@@ -56,6 +56,17 @@ Start playing the audio, then after it finishes
 
 ### Running the game on an emulator
 
+#### MAME mk14 Emulator
+
+IMPORTANT! The MAME mk14 emulator is currently buggy! It emulates the "XPAL 0" command incorrectly, as it does not increment the PC value after executing the command.
+This can be fixed by inserting the line "if ( opcode == 0x30 ) m_PC.w.l = ADD12(m_PC.w.l,1);" before "break" on line 367 of the src/devices/cpu/scmp/scmp.cpp file.
+The fixed file is available in the mame folder.
+When launched with the "mame mk14 -debug" command, you can enter the command "load ledMatchOctal-lf12-gf12.bin,0f12" at the bottom of the debug window, then press F5 to run it.
+Next, in the emulator, after entering "0f12," press the "X" key (equivalent to the [Go] button) to run the game.
+The [Term] button corresponds to the "-" key located at the top right of the keyboard.
+
+#### The MK14_Emulator_python and JavaScript emulators
+
 The .hex file is generally compatible with emulators.
 Tested with the [MK14.py](https://github.com/dallday/MK14_Emulator_python) emulator.
 
@@ -109,5 +120,16 @@ hang lejátszásának indítása, majd a befejezés után
 
 ### A játék futtatása emulátoron
 
-Emulátorhoz általában az hex fájl használható.
+#### MAME mk14 emulátor
+
+FONTOS! A Mame mk14 emulátora jelenleg hibás! Az "XPAL 0" parancsot hibásan emulálja, mivel a parancs végrehajtása után nem inkrementálja a PC értékét.
+Ezt az src/devices/cpu/scmp/scmp.cpp fájl 367. sorába a "break" elé beszúrt "if ( opcode == 0x30 ) m_PC.w.l = ADD12(m_PC.w.l,1);" sorral lehet javítani.
+A mame mappában elérhető a javított fájl.
+A "mame mk14 -debug" paranccsal indítva a debug ablakl alján beírható a "load ledMatchOctal-lf12-gf12.bin,0f12" parancs, majd utána az F5 gommbal futtatható 
+tovább az emulátor, és a "0f12" beírása után a "X" gomb lenyomásával ([Go] gomb megfelelője) futtatható a játék.
+A [Term] gombnak a billentyűzet jobb felső szélén található "-" billentyű felel meg.
+
+#### Az MK14_Emulator_python és a javascript emulátorok
+
+Emulátorhoz általában a hex fájl használható.
 Az [MK14.py](https://github.com/dallday/MK14_Emulator_python) emulátorral tesztelve.
