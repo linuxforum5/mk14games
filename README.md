@@ -74,9 +74,9 @@ A sor elején látható minta előállításához a 8-as számrendszer számjegy
 A kiválasztott számjegy lenyomása beteszi a felhasznált számjegyek közé az adott számot, majd újbóli lenyomása esetén törli annak használatát.
 Minden feladat maximum 5 számjegy kiválasztásával biztosan megoldható, így 5 számjegynél több nem is használható fel.
 Az aktuálisan kiválasztott számokból adódó egyesített minta a baloldalon látható feladvány melleti pozíción látható.
-Ha sikerült megoldani a feladatot, úgy a 2. és 3. pozíción megjelenik egy villogó GO felirat, ami azt jelzi, hogy a Go gomb megynomásával 
+Ha sikerült megoldani a feladatot, úgy a 2. és 3. pozíción megjelenik egy villogó GO felirat, ami azt jelzi, hogy a [Go] gomb megnyomásával 
 új feladvány kérhető.
-Ha egy adott feladvány túl nehéz, a [Term] gomb megynomásával új megszakítható az adott feladvány, és új feladvány kérhető.
+Ha egy adott feladvány túl nehéz, a [Term] gomb megynomásával megszakítható az adott feladvány, és új feladvány kérhető.
 
 ### A játék letöltése
 
